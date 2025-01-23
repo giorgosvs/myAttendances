@@ -1,0 +1,326 @@
+.App {
+  height: 100vh;
+  padding: 0px 100px;
+  display: inline-table;
+  align-items: center;
+  justify-content: left;
+  text-align: left;
+}
+
+.courses {
+  display: grid;
+  flex: 1;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.course {
+  display: block;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+}
+.course-details table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.course-details th,
+.course-details td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.course-details th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.course-details table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.curriculums {
+  display: block;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+
+/* Styling for the curriculum table */
+.curriculum-details th,
+.curriculum-details td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.curriculum-details th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+/* Remove bullet points from course list and style the list */
+.course-list {
+  list-style-type: none; /* Remove default bullets */
+  padding-left: 0;       /* Remove default padding */
+  margin: 0;             /* Reset margin for cleaner display */
+}
+
+.course-list li {
+  padding: 5px 0;        /* Add some padding between course items */
+}
+
+.viewButton {
+  padding: 6px 12px;  /* Slightly smaller padding for a minimal look */
+  background-color: transparent; /* No background color */
+  color: #007bff; /* Soft blue color for text */
+  border: 1px solid #007bff; /* Blue border to match text */
+  border-radius: 4px; /* Slightly rounded corners */
+  font-size: 0.9em; /* Smaller font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+}
+
+.viewButton:hover {
+  background-color: #007bff; /* Blue background on hover */
+  color: white; /* White text on hover */
+}
+
+/* Focus Effect */
+.viewButton:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Subtle blue focus ring */
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 15px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.button a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Active Button (Green) */
+.active {
+  background-color: #e0f7e9; /* Light green background */
+  color: #1b5e20; /* Dark green text */
+  border: 1px solid #1b5e20;
+}
+
+.active:hover {
+  background-color: #1b5e20;
+  color: white;
+}
+
+/* Inactive Button (Red) */
+.inactive {
+  background-color: #fbe9e9; /* Light red background */
+  color: #b71c1c; /* Dark red text */
+  border: 1px solid #b71c1c;
+}
+
+.inactive:hover {
+  background-color: #b71c1c;
+  color: white;
+}
+
+/* Update Button */
+.update {
+  background-color: #e7f3fe;
+  color: #0d47a1;
+  border: 1px solid #0d47a1;
+}
+
+.update:hover {
+  background-color: #0d47a1;
+  color: white;
+}
+
+.button.add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4caf50; /* Green background */
+  color: white; /* White text */
+  padding: 6px 12px; /* Reduced padding for smaller size */
+  border: none; /* No border */
+  border-radius: 4px; /* Slightly smaller rounded corners */
+  font-size: 12px; /* Smaller text size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.button.add:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.button.add .plus-sign {
+  font-size: 20px; /* Size of the "+" sign */
+  margin-right: 8px; /* Space between "+" and the text */
+  font-weight: bold; /* Bold "+" */
+}
+
+.button.add:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 4px #4caf50; /* Custom focus outline */
+}
+
+
+
+/* Delete Button */
+.delete {
+  background-color: #ffebee;
+  color: #b71c1c;
+  border: 1px solid #b71c1c;
+}
+
+.delete:hover {
+  background-color: #b71c1c;
+  color: white;
+}
+
+.view-records{
+  background-color: #79a873;
+  color: #f1f5f1;
+  border: 1px solid #093505;
+}
+
+.view-records:hover{
+  background-color: #2e4126c5;
+  color: white;
+}
+
+.course-details, .class-details {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.course-details th, .course-details td,
+.class-details th, .class-details td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.course-details th, .class-details th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.class-details {
+  margin-left: 20px; /* Indent the nested table for clarity */
+}
+
+.class-details tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.class-details tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.class-details td, .course-details td {
+  vertical-align: top;
+}
+
+.course-item h3 {
+  cursor: pointer;
+  padding: 8px 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+
+
+
+.form {
+  width: 400px; /* Adjust the form width as needed */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 auto; /* Center the form */
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formButton {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em; 
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;  /* Allows button-like display without link interference */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  text-decoration: none; /* Ensure no underline if button is wrapped in a Link */
+}
+
+/* Hover Effect */
+.formButton:hover {
+  background-color: #0056b3;
+  box-shadow: 0 6px 10px rgba(0, 86, 179, 0.3);
+  transform: translateY(-2px);
+}
+
+.form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333; /* Optional for readability */
+}
+.formButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+.form input,
+.form select {
+  margin-top: 5px; /* Spacing between label and input */
+  margin-bottom: 15px; /* Adjust if needed for clarity */
+}
+
+.form-navigation {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input::placeholder {
+  color: #999;
+}
