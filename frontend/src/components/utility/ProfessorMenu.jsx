@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 
-export const ProfessorMenu = ({ user, toggleUserRole }) => {
+export const ProfessorMenu = ({ user, toggleUserRole,handleLogout }) => {
   const navigate = useNavigate();
 
   return (
@@ -84,6 +84,17 @@ export const ProfessorMenu = ({ user, toggleUserRole }) => {
               <MenuItem value="Student">Student</MenuItem>
             </Select>
           </FormControl>
+          {user && (
+          <Box>
+            <Typography sx={{ display: "inline", marginRight: 2 }}>
+              Welcome, {user.name}
+            </Typography>
+            <Button color="inherit" onClick={handleLogout}>
+              Logout
+            </Button>
+          </Box>
+        )}
+
         </Box>
       </Toolbar>
     </AppBar>

@@ -14,6 +14,7 @@ import {
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { DataGrid } from "@mui/x-data-grid";
+import axiosInstance from "../utility/axiosInstance";
 
 const StudentRecords = ({ user }) => {
   const [records, setRecords] = useState([]);
@@ -36,7 +37,7 @@ const StudentRecords = ({ user }) => {
   useEffect(() => {
     const fetchRecords = async () => {
       try {
-        const res = await axios.get(
+        const res = await axiosInstance.get(
           `http://localhost:8080/api/classes/${classId}/records`
         );
         setRecords(res.data);
@@ -196,7 +197,7 @@ const StudentRecords = ({ user }) => {
               marginBottom: 2,
             }}
             onClick={() => {
-              navigate("/home", {
+              navigate("/portfolio", {
                 state: { selectedIndex: location.state?.selectedIndex }, // Pass state back
               });
             }}

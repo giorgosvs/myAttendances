@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import BuildIcon from '@mui/icons-material/Build';
 
-export const Menu = ({ user, toggleUserRole }) => {
+export const Menu = ({ user, toggleUserRole,handleLogout }) => {
   const navigate = useNavigate();
 
   return (
@@ -83,6 +83,17 @@ export const Menu = ({ user, toggleUserRole }) => {
               <MenuItem value="Student">Student</MenuItem>
             </Select>
           </FormControl>
+          {user && (
+          <Box>
+            <Typography sx={{ display: "inline", marginRight: 2 }}>
+              Welcome, {user.name}
+            </Typography>
+            <Button color="inherit" onClick={handleLogout}>
+              Logout
+            </Button>
+          </Box>
+        )}
+
         </Box>
       </Toolbar>
     </AppBar>

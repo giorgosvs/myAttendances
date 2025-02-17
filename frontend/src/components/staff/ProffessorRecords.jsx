@@ -7,6 +7,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Fab } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/AddTwoTone";
+import axiosInstance from "../utility/axiosInstance";
 
 const ProffessorRecords = ({ user }) => {
   const [records, setRecords] = useState([]);
@@ -25,7 +26,7 @@ const ProffessorRecords = ({ user }) => {
   useEffect(() => {
     const fetchRecordsByClassId = async () => {
       try {
-        const res = await axios.get(
+        const res = await axiosInstance.get(
           `http://localhost:8080/api/classes/${classId}/records`
         );
         setRecords(res.data);

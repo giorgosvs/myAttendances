@@ -16,7 +16,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 
 
-export const StudentMenu = ({ user, toggleUserRole }) => {
+export const StudentMenu = ({ user, toggleUserRole, handleLogout }) => {
   const navigate = useNavigate();
 
   return (
@@ -24,7 +24,7 @@ export const StudentMenu = ({ user, toggleUserRole }) => {
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* Logo / Title */}
         
-        <Button color="inherit" component={Link} to="/">
+        <Button color="inherit" component={Link} to="/portfolio">
       
         <AssignmentTurnedInIcon></AssignmentTurnedInIcon>
         <Typography variant="h6" component="div" sx={{margin:2}}>
@@ -35,7 +35,7 @@ export const StudentMenu = ({ user, toggleUserRole }) => {
         {/* Navigation Links */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
         
-
+        <Button color="inherit" component={Link} to="/portfolio">Portfolio</Button>
           {/* User Role Selector */}
           <FormControl sx={{ m: 1, minWidth: 200 }}>
             <InputLabel id="user-role-select-label">Switch Role</InputLabel>
@@ -52,6 +52,17 @@ export const StudentMenu = ({ user, toggleUserRole }) => {
               <MenuItem value="Student">Student</MenuItem>
             </Select>
           </FormControl>
+          {user && (
+          <Box>
+            <Typography sx={{ display: "inline", marginRight: 2 }}>
+              Welcome, {user.name}
+            </Typography>
+            <Button color="inherit" onClick={handleLogout}>
+              Logout
+            </Button>
+          </Box>
+        )}
+
         </Box>
       </Toolbar>
     </AppBar>
