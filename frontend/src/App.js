@@ -1,9 +1,9 @@
 import React, { useState,useEffect } from "react";
-import { BrowserRouter, Routes, Route, useNavigate,Navigate } from "react-router-dom";
-import { ThemeProvider, createTheme, CssBaseline, Box } from "@mui/material";
+import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
+import { ThemeProvider, createTheme, CssBaseline, Box, CircularProgress } from "@mui/material";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useNavigate } from "react-router-dom";
 // Import components
 import Courses from "./components/adminsec/Courses.jsx";
 import AddCourse from "./components/adminsec/AddCourse.jsx";
@@ -39,6 +39,7 @@ import ProfessorStudents from "./components/staff/ProfessorStudents.jsx";
 import StudentClasses from "./components/student/StudentClasses.jsx";
 import StudentRecords from "./components/student/StudentRecords.jsx";
 import Home from "./components/utility/Home.jsx";
+import Login from "./components/utility/Login.jsx";
 
 
 // Custom Theme
@@ -69,7 +70,33 @@ const theme = createTheme({
 
 const USERS = {
   Admin: {
+    Admin: {
     name: "Admin",
+    surname: "Admin",
+    userRole: "Admin",
+    department_id: null,
+  },
+  Secretariat: {
+    id: 11,
+    name: "Despoina",
+    surname: "Mavropoulou",
+    userRole: "Secretariat",
+    department_id: "IT",
+  },
+  Professor: {
+    id: 1,
+    name: "Alice",
+    surname: "Williams",
+    userRole: "Professor",
+    department_id: "IT",
+  },
+  Student: {
+    studentid: "IT2003",
+    name: "Emily",
+    surname: "Johnson",
+    userRole: "Student",
+    department_id: "IT",
+  },  name: "Admin",
     surname: "Admin",
     userRole: "Admin",
     department_id: null,
@@ -98,23 +125,52 @@ const USERS = {
 };
 
 function App() {
-  const [user, setUser] = useState(USERS.Admin);
+  // const [user, setUser] = useState(USERS.Admin);
+  const [user, setUser] = useState(null);
+  const [loading,setLoading] = useState(true);
+
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    const storedToken = localStorage.getItem("token");
+
+    if (storedUser && storedToken) {
+        setUser(JSON.parse(storedUser));
+    }
+
+    setLoading(false);
+}, []);
+
 
   const toggleUserRole = (e) => {
     setUser(USERS[e.target.value]);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null); 
+    
+  };
+
+  // if (loggedOut) {
+  //   return <Navigate to="/login" replace />;
+  // }
+  
+
   const renderMenu = () => {
+    if(!user) {return null};
     if (user.userRole === "Professor") {
-      return <ProfessorMenu user={user} toggleUserRole={toggleUserRole} />;
+      return <ProfessorMenu user={user} toggleUserRole={toggleUserRole} handleLogout={handleLogout} />;
     
     } else if (user.userRole === "Student") {
-      return <StudentMenu user={user} toggleUserRole={toggleUserRole} />;
+      return <StudentMenu user={user} toggleUserRole={toggleUserRole} handleLogout={handleLogout}/>;
     } else {
       // Default Menu for Admin and Secretariat
-      return <Menu user={user} toggleUserRole={toggleUserRole} />;
+      return <Menu user={user} toggleUserRole={toggleUserRole} handleLogout={handleLogout}/>;
     }
   };
+
 
 
   return (
@@ -122,9 +178,19 @@ function App() {
       <CssBaseline />
       <BrowserRouter>
         <ToastContainer autoClose={2000} hideProgressBar pauseOnHover theme="colored" />
+        {loading ? ( 
+                <CircularProgress/>
+            ) : (
+        <>
         {renderMenu()}
         <Box sx={{ marginTop: "100px", padding: 2 }}>
           <Routes>
+          {!user ? (
+              // If user is not logged in, show login page
+              <Route path="*" element={<Login setUser={setUser} />} />
+            ) : (
+              <>
+                <Route path="/home" element={<Home user={user} />} />
             {user.userRole === "Admin" || user.userRole === "Secretariat" ? (
               <>
               <Route path="/home" element={<Home user={user} />} />
@@ -142,7 +208,7 @@ function App() {
                 <Route path="/classes/showClasses" element={<Classes user={user} />} />
                 <Route path="/classes/addForm" element={<AddClass user={user} />} />
                 <Route path="/classes/updateClass/:id" element={<UpdateClass user={user} />} />
-                <Route path="/classes/:id/records" element={<Records />}></Route>
+                <Route path="/classes/:id/records" element={<Records user={user}/>}></Route>
                 <Route path="/departments/showDepartments" element={<Departments />} />
                 <Route path="/departments/addForm" element={<AddDepartment />} />
                 <Route path="/departments/updateDepartment/:id" element={<UpdateDepartment />} />
@@ -170,15 +236,12 @@ function App() {
               </>
             ) : user.userRole === "Student" ? (
               <>
-               {/* Redirect the root route ("/") to "/home" for students */}
+               {/* Redirect the root route ("/") to "/home" for students
     <Route path="/" element={<Navigate to="/home" replace />} />
-    
-    {/* Define the /home route */}
-            {/* Redirect the root route ("/") to "/home" for students */}
-            <Route path="/" element={<Navigate to="/home" replace />} />
+     */}
     
             {/* Define the /home route */}
-                <Route path="/home" element={<StudentClasses user={user} />} />
+                <Route path="/portfolio" element={<StudentClasses user={user} />} />
                 <Route path="/classes/:id/records" element={<StudentRecords user={user} />} />
                 <Route path="/records/updateRecord/:id" element={<UpdateRecord />} />
                 <Route path="/records/addRecordForm/:class_id" element={<AddRecord />} />
@@ -187,11 +250,16 @@ function App() {
                 <Route path="/attendances/addForm/:record_id" element={<AddAttendance />} />
               </> 
             ) : (
-              <Route path="*" element={<Navigate to="/" />} />
+              <Route path="*" element={<Navigate to="/home" />} />
+            )}
+            </>
             )}
           </Routes>
         </Box>
+        </>
+        )}
       </BrowserRouter>
+      
     </ThemeProvider>
   );
 }

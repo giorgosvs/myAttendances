@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import axiosInstance from "../utility/axiosInstance";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, Typography, Box } from "@mui/material";
@@ -10,27 +11,28 @@ import {
 
 import AddIcon from "@mui/icons-material/AddTwoTone";
 
-export const Records = () => {
+export const Records = ({user}) => {
   const [records, setRecords] = useState([]);
   const [classname, setClassname] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const classId = location.pathname.split("/")[2]; // Get ID from URL
 
+
   // Fetch records by class ID
   useEffect(() => {
     const fetchRecordsByClassId = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:8080/api/classes/${classId}/records`
-        );
+        const res = await axiosInstance.get(`/classes/${classId}/records`);
         setRecords(res.data);
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching records:", err);
       }
     };
+
     fetchRecordsByClassId();
   }, [classId]);
+
 
   // Fetch class title
   useEffect(() => {
