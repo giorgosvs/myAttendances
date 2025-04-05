@@ -1,6 +1,8 @@
 # myAttendances
 This is my degree assignment for Harokopio University of Athens, built with **React**, **Node.js**, and **MySQL2**. The project is a web application that allows students to mark their attendance for lab or theory lectures in the classes they are enrolled in. The platform also supports **CRUD operations** for teaching, administrative, and secretarial staff, enabling them to manage classes, courses, and attendance records according to their roles and permissions.
 
+Thesis link:  https://thesis.hua.gr/media/deposits/GeorgiosVasilakis.pdf
+
 ## Setup and Run Instructions
 
 **MySQL**
